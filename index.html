@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>HW7 Firebase assignment basic</title>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    
 </head>
 
 <body>
@@ -20,7 +19,8 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4"><strong>Train Scheduler</strong></h1>
-                <p class="lead">Enter data in the textbox bellow in order to add trains.</p>
+                <p class="lead">Enter data (all fields are required) in the textbox bellow in order to add
+                    trains.<br><br>Please enter with correct data type and format to avoid display error.</p>
             </div>
         </div>
         <div class="card">
@@ -36,9 +36,11 @@
                             <th scope="col">Frequency (min)</th>
                             <th scope="col">Next Arrival</th>
                             <th scope="col">Minutes Away</th>
+                            <th scope="col">Updated in <span id="secId"></span> seconds</th>
+                            <!-- <th scope="col">Delete Train</th> -->
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody scope="col">
                         <!-- additional rows will be added here -->
                     </tbody>
                 </table>

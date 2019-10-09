@@ -17,3 +17,10 @@ h1, p {
 form {
     margin: 0 14px;
 }
+.deldel {
+    background-color: #5e80a9;
+    color: white;
+    border-radius: 5px;;
+    margin-top: 12px;
+    font-size: 1rem;
+}

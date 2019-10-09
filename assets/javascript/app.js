@@ -24,23 +24,28 @@ $("#submitButton").on("click", function (event) {
     var destinationIn = $("#destinationInput").val().trim();
     var firstTrainTimeIn = moment($("#firstTrainTimeInput").val().trim(), "HH:mm").format("HH:mm");
     var frequencyIn = $("#frequencyInput").val().trim();
+    var submitButtonCickTime = moment().format("X");
+    if (trainNameIn !== "" && destinationIn !== "" &&     // all text-boxes are required
+        firstTrainTimeIn !== "" && frequencyIn !== "") {
 
-    // create local temporary object for holding user input
-    var newTrainInformation = {
-        trainName: trainNameIn,
-        destination: destinationIn,
-        firstTrainTime: firstTrainTimeIn,
-        frequency: frequencyIn
-    };
+        // create local temporary object for holding user input
+        var newTrainInformation = {
+            trainName: trainNameIn,
+            destination: destinationIn,
+            firstTrainTime: firstTrainTimeIn,
+            frequency: frequencyIn,
+            rowId: submitButtonCickTime
+        };
 
-    // upload entered data to the database
-    database.ref().push(newTrainInformation);
+        // upload entered data to the database
+        database.ref().push(newTrainInformation);
 
-    // clears all of the text-boxes
-    $("#trainNameInput").val("");
-    $("#destinationInput").val("");
-    $("#firstTrainTimeInput").val("");
-    $("#frequencyInput").val("");
+        // clears all of the text-boxes
+        $("#trainNameInput").val("");
+        $("#destinationInput").val("");
+        $("#firstTrainTimeInput").val("");
+        $("#frequencyInput").val("");
+    }
 });
 
 // create firebase event for adding train information to the database
@@ -53,6 +58,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var destinationVar = childSnapshot.val().destination;
     var frequencyVar = childSnapshot.val().frequency;
     var firstTrainTimeVar = childSnapshot.val().firstTrainTime;
+    var rowIdVar = childSnapshot.val().rowId;
 
     // calculation part
     // first time (pushed back 1 year to make sure it comes before current time)
@@ -80,16 +86,37 @@ database.ref().on("child_added", function (childSnapshot) {
     var nextArrivalVar = moment(nextTrain).format("hh:mm A");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm A"));
 
-
     // create new row
-    var newRow = $("<tr>").append(
+    var newRow = $("<tr id='trId" + rowIdVar + "'>").append(
         $("<td>").text(trainNameVar),
         $("<td>").text(destinationVar),
         $("<td>").text(frequencyVar),
         $("<td>").text(nextArrivalVar),
-        $("<td>").text(timeMinutesTillTrain)
+        $("<td>").text(timeMinutesTillTrain),
+        $("<button class='deldel' id='deleteBtn" + rowIdVar + "'>").text("Delete"),
     );
 
     // append the new row to the table
     $(".table > tbody").append(newRow);
+
+    // delete button clicked
+    $("#deleteBtn" + rowIdVar).on("click", function () {
+        event.preventDefault();
+        $(this).closest("tr").remove(); /* delete the row from HTML */
+        console.log("deleted key:" + childSnapshot.key);
+        database.ref().child(childSnapshot.key).remove(); /* remove THE DELETED train information from database */
+    });
 });
+
+/* train schedule automatically updates every 1 minute
+   for all the mulyiply opened browsers */
+var tempSec = 61;
+setInterval(function () {
+    location.reload();
+    tempSec = 61;
+}, 61 * 1000);
+
+/* displaying the remaining seconds to next update */
+setInterval(function () {
+    document.getElementById("secId").innerHTML = --tempSec;
+}, 1000);
