@@ -1,0 +1,83 @@
+<!-- HW7 Firebase assignment basic - Train Scheduler -->
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>HW7 Firebase assignment basic</title>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="outer_limit">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4"><strong>Train Scheduler</strong></h1>
+                <p class="lead">Enter data in the textbox bellow in order to add trains.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Current Train Schedule
+            </div>
+            <div class="card-body trainInformationDisplay">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency (min)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- additional rows will be added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div><br>
+        <div class="card">
+            <div class="card-header">
+                Add Train
+            </div>
+            <div class="card-body">
+                <form role="form">
+                    <div class="form-group row">
+                        <label for="trainNameInput">Train Name</label>
+                        <input class="form-control" id="trainNameInput" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <label for="destinationInput">Destination</label>
+                        <input class="form-control" id="destinationInput" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstTrainTimeInput">First Train Time (HH:mm - military time)</label>
+                        <input class="form-control" id="firstTrainTimeInput" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <label for="frequencyInput">Frequency (min)</label>
+                        <input class="form-control" id="frequencyInput" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <button class="btn btn-default" id="submitButton" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div><br>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script> <!-- from hw7-eric -->
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>

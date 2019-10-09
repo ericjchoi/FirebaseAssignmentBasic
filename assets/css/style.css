@@ -1,0 +1,19 @@
+.outer_limit {
+    margin: 0 5%;
+}
+.jumbotron {
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: rgb(120, 63, 63);
+}
+h1, p {
+    text-align: center;
+    color: white;
+}
+.card-header, .btn {
+    background-color: #5e80a9;
+    color: white;
+}
+form {
+    margin: 0 14px;
+}
